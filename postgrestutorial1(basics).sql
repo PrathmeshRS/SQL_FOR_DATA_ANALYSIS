@@ -1,6 +1,7 @@
 -- LIMIT
 
--- Try using LIMIT yourself below by writing a query that displays all the data in the occurred_at, account_id, and channel columns of the web_events table, and limits the output to only the first 15 rows.
+-- Try using LIMIT yourself below by writing a query that displays all the data in the occurred_at, account_id, and channel columns of the web_events table, and limits the output to only the first 15
+-- rows.
 SELECT occurred_at, account_id, channel 
 FROM web_events 
 LIMIT 15;
@@ -13,7 +14,8 @@ SELECT id, occurred_at, total_amt_usd
 FROM orders
 ORDER BY occurred_at
 LIMIT 10;
--- The ORDER BY statement always comes in a query after the SELECT and FROM statements, but before the LIMIT statement. If you are using the LIMIT statement, it will always appear last. As you learn additional commands, the order of these statements will matter more.
+-- The ORDER BY statement always comes in a query after the SELECT and FROM statements, but before the LIMIT statement. If you are using the LIMIT statement, it will always appear last. As you learn
+-- additional commands, the order of these statements will matter more.
 
 -- Write a query to return the top 5 orders in terms of largest total_amt_usd. Include the id, account_id, and total_amt_usd.
 SELECT id, account_id, total_amt_usd
@@ -27,12 +29,14 @@ FROM orders
 ORDER BY total_amt_usd DESC
 LIMIT 20;
 
--- Write a query that displays the order ID, account ID, and total dollar amount for all the orders, sorted first by the account ID (in ascending order), and then by the total dollar amount (in descending order).
+-- Write a query that displays the order ID, account ID, and total dollar amount for all the orders, sorted first by the account ID (in ascending order), and then by the total dollar amount
+-- (in descending order).
 SELECT id, account_id, total_amt_usd
 FROM orders
 ORDER BY account_id ASC, total_amt_usd DESC;
 
--- Now write a query that again displays order ID, account ID, and total dollar amount for each order, but this time sorted first by total dollar amount (in descending order), and then by account ID (in ascending order).
+-- Now write a query that again displays order ID, account ID, and total dollar amount for each order, but this time sorted first by total dollar amount (in descending order), and then by account ID
+-- (in ascending order).
 SELECT id, account_id, total_amt_usd
 FROM orders
 ORDER BY total_amt_usd DESC, account_id ASC;
@@ -71,7 +75,8 @@ LIMIT 10;
 
 /*
 --WHERE WITH NON-NUMERIC
-The WHERE statement can also be used with non-numeric data. We can use the = and != operators here. You need to be sure to use single quotes (just be careful if you have quotes in the original text) with the text data, not double quotes.
+The WHERE statement can also be used with non-numeric data. We can use the = and != operators here. You need to be sure to use single quotes (just be careful if you have quotes in the original text)
+with the text data, not double quotes.
 
 Commonly when we are using WHERE with non-numeric data fields, we use the LIKE, NOT, or IN operators.
  
@@ -84,7 +89,8 @@ WHERE name='Exxon Mobil';
 -----------------------------------------------------------------------------
 -- ARITHMETIC OPERATORS
 /*
-Creating a new column that is a combination of existing columns is known as a derived column (or "calculated" or "computed" column). Usually you want to give a name, or "alias," to your new column using the AS keyword.
+Creating a new column that is a combination of existing columns is known as a derived column (or "calculated" or "computed" column). Usually you want to give a name, or "alias," to your new column 
+using the AS keyword.
 
 This derived column, and its alias, are generally only temporary, existing just for the duration of your query. The next time you run a query and access this table, the new column will not be there.
 
@@ -95,12 +101,14 @@ If you are deriving the new column from existing columns using a mathematical ex
 - (Subtraction)
 / (Division)
 */
--- Using orders table Create a column that divides the standard_amt_usd by the standard_qty to find the unit price for standard paper for each order. Limit the results to the first 10 orders, and include the id and account_id fields.
+-- Using orders table Create a column that divides the standard_amt_usd by the standard_qty to find the unit price for standard paper for each order. Limit the results to the first 10 orders, and 
+-- include the id and account_id fields.
 SELECT id, account_id, standard_amt_usd/standard_qty AS price
 FROM orders
 LIMIT 10;
 
--- Write a query that finds the percentage of revenue that comes from poster paper for each order. You will need to use only the columns that end with _usd. (Try to do this without using the total column.) Display the id and account_id fields also.
+-- Write a query that finds the percentage of revenue that comes from poster paper for each order. You will need to use only the columns that end with _usd. (Try to do this without using the total
+-- column) Display the id and account_id fields also.
 SELECT id, account_id, (poster_amt_usd/total_amt_usd)*100 AS poster_revenue_percentage
 FROM orders
 LIMIT 10;
@@ -122,7 +130,10 @@ LIMIT 10;
 
 /*
 LIKE OPERATOR
-The LIKE operator is extremely useful for working with text. You will use LIKE within a WHERE clause. The LIKE operator is frequently used with %. The % tells us that we might want any number of characters leading up to a particular set of characters or following a certain set of characters, as we saw with the google syntax above. Remember you will need to use single quotes for the text you pass to the LIKE operator, because of this lower and uppercase letters are not the same within the string. Searching for 'T' is not the same as searching for 't'. In other SQL environments (outside the classroom), you can use either single or double quotes.
+The LIKE operator is extremely useful for working with text. You will use LIKE within a WHERE clause. The LIKE operator is frequently used with %. The % tells us that we might want any number of
+characters leading up to a particular set of characters or following a certain set of characters, as we saw with the google syntax above. Remember you will need to use single quotes for the text you
+pass to the LIKE operator, because of this lower and uppercase letters are not the same within the string. Searching for 'T' is not the same as searching for 't'. In other SQL environments (outside
+the classroom), you can use either single or double quotes.
 */
 
 -- Use the accounts table to find all the companies whose names start with 'C'.
@@ -190,7 +201,8 @@ WHERE name NOT LIKE '%s';
 
 /*
 AND OPERATOR
-The AND operator is used within a WHERE statement to consider more than one logical clause at a time. Each time you link a new statement with an AND, you will need to specify the column you are interested in looking at. You may link as many statements as you would like to consider at the same time. 
+The AND operator is used within a WHERE statement to consider more than one logical clause at a time. Each time you link a new statement with an AND, you will need to specify the column you are
+interested in looking at. You may link as many statements as you would like to consider at the same time. 
 This operator works with all of the operations we have seen so far including arithmetic operators (+, *, -, /).
 LIKE, IN, and NOT logic can also be linked together using the AND operator.
 
@@ -208,12 +220,14 @@ SELECT *
 FROM accounts
 WHERE name NOT LIKE 'C%' AND name NOT LIKE '%s';
 
--- When you use the BETWEEN operator in SQL, do the results include the values of your endpoints, or not? Figure out the answer to this important question by writing a query that displays the order date and gloss_qty data for all orders where gloss_qty is between 24 and 29.
+-- When you use the BETWEEN operator in SQL, do the results include the values of your endpoints, or not? Figure out the answer to this important question by writing a query that displays the order
+-- date and gloss_qty data for all orders where gloss_qty is between 24 and 29.
 SELECT occurred_at, gloss_qty 
 FROM orders
 WHERE gloss_qty BETWEEN 24 AND 29;
 
--- Use the web_events table to find all information regarding individuals who were contacted via the organic or adwords channels, and started their account at any point in 2016, sorted from newest to oldest.
+-- Use the web_events table to find all information regarding individuals who were contacted via the organic or adwords channels, and started their account at any point in 2016, sorted from newest to
+-- oldest.
 SELECT *
 FROM web_events
 WHERE channel IN ('organic', 'adwords') AND EXTRACT(YEAR FROM occurred_at)='2016'
@@ -226,8 +240,9 @@ ORDER BY occurred_at DESC;
 
 /*
 OR OPERATOR
-Similar to the AND operator, the OR operator can combine multiple statements. Each time you link a new statement with an OR, you will need to specify the column you are interested in looking at. You may link as many statements as you would like to consider at the same time.
-This operator works with all of the operations we have seen so far including arithmetic operators (+, *, -, /), LIKE, IN, NOT, AND, and BETWEEN logic can all be linked together using the OR operator.
+Similar to the AND operator, the OR operator can combine multiple statements. Each time you link a new statement with an OR, you will need to specify the column you are interested in looking at. You
+may link as many statements as you would like to consider at the same time. This operator works with all of the operations we have seen so far including arithmetic operators (+, *, -, /), LIKE, IN,
+NOT, AND, and BETWEEN logic can all be linked together using the OR operator.
 
 When combining multiple of these operations, we frequently might need to use parentheses to assure that logic we want to perform is being executed correctly. 
 */

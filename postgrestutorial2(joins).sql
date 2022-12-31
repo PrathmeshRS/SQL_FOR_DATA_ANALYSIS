@@ -7,7 +7,8 @@ LIMIT 20;
 -- Notice this result is the same as if you switched the tables in the FROM and JOIN. Additionally, which side of the = a column is listed doesn't matter.
 
 /*
- The SELECT clause indicates which column(s) of data you'd like to see in the output (For Example, orders.* gives us all the columns in orders table in the output). The FROM clause indicates the first table from which we're pulling data, and the JOIN indicates the second table. 
+ The SELECT clause indicates which column(s) of data you'd like to see in the output (For Example, orders.* gives us all the columns in orders table in the output). The FROM clause indicates the
+ first table from which we're pulling data, and the JOIN indicates the second table. 
  The ON clause specifies the column on which you'd like to merge the two tables together.
 The ON statement holds the two columns that get linked across the two tables. This will be the focus in the next concepts.
 */
@@ -34,7 +35,8 @@ ON web_events.account_id=accounts.id
 LIMIT 20;
 
 /*
-PRIMARY KEY: A primary key is a unique column in a particular table. This is the first column in each of our tables. Here, those columns are all called id, but that doesn't necessarily have to be the name.
+PRIMARY KEY: A primary key is a unique column in a particular table. This is the first column in each of our tables. Here, those columns are all called id, but that doesn't necessarily have to be the
+              name.
               It is common that the primary key is the first column in our tables in most databases.
 
 FOREIGN KEY: A foreign key is a column in one table that is a primary key in a different table.
@@ -61,14 +63,16 @@ JOIN tablename2 AS t2
 
 */
 
--- Provide a table for all web_events associated with account name of Walmart. There should be three columns. Be sure to include the primary_poc, time of the event, and the channel for each event. Additionally, you might choose to add a fourth column to assure only Walmart events were chosen.
+-- Provide a table for all web_events associated with account name of Walmart. There should be three columns. Be sure to include the primary_poc, time of the event, and the channel for each event.
+-- Additionally, you might choose to add a fourth column to assure only Walmart events were chosen.
 SELECT a.primary_poc, w.occurred_at, w.channel
 FROM accounts AS a
 JOIN web_events AS w
 ON a.id = w.account_id
 WHERE a.name='Walmart';
 
--- Provide a table that provides the region for each sales_rep along with their associated accounts. Your final table should include three columns: the region name, the sales rep name, and the account name. Sort the accounts alphabetically (A-Z) according to account name.
+-- Provide a table that provides the region for each sales_rep along with their associated accounts. Your final table should include three columns: the region name, the sales rep name, and the
+-- account name. Sort the accounts alphabetically (A-Z) according to account name.
 SELECT r.name AS region, s.name sales_representive, a.name AS account
 FROM accounts AS a
 JOIN sales_reps AS s
@@ -83,8 +87,8 @@ In the above example if you don't alias name columns of individual columns the r
 one column.
 */
 
--- Provide the name for each region for every order, as well as the account name and the unit price they paid (total_amt_usd/total) for the order. Your final table should have 3 columns: region name, account name, and unit price. A few accounts have 0 for total,
--- so I divided by (total + 0.01) to assure not dividing by zero.
+-- Provide the name for each region for every order, as well as the account name and the unit price they paid (total_amt_usd/total) for the order. Your final table should have 3 columns: region name,
+-- account name, and unit price. A few accounts have 0 for total, so I divided by (total + 0.01) to assure not dividing by zero.
 SELECT r.name AS region, a.name AS account, o.total_amt_usd/(o.total+0.01) AS unit_price
 FROM accounts AS a
 JOIN orders AS o
@@ -116,8 +120,8 @@ WHERE r.name='Midwest'
 ORDER BY a.name;
 -- 48 results
 
--- Provide a table that provides the region for each sales_rep along with their associated accounts. This time only for accounts where the sales rep has a first name starting with S and in the Midwest region. 
--- Your final table should include three columns: the region name, the sales rep name, and the account name. Sort the accounts alphabetically (A-Z) according to account name.
+-- Provide a table that provides the region for each sales_rep along with their associated accounts. This time only for accounts where the sales rep has a first name starting with S and in the
+-- Midwest region. Your final table should include three columns: the region name, the sales rep name, and the account name. Sort the accounts alphabetically (A-Z) according to account name.
 SELECT r.name region_name, s.name as sales_rep_name, a.name as account_name
 FROM sales_reps s
 JOIN accounts a
